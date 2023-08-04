@@ -34,6 +34,9 @@ Route::get('/resetPassword/{token}', [AuthController::class, 'resetPassword'])->
 Route::post('/resetPassword/action', [AuthController::class, 'resetPasswordAction'])->name('resetPasswordAction');
 Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'view'])->name('dashboard');
+    Route::get('dashboardLoad', [DashboardController::class, 'load_data'])->name('dashboard.load_data');
+    Route::get('load_delivered', [DashboardController::class, 'load_delivered'])->name('dashboard.load_delivered');
+    Route::get('sendDelivered', [DashboardController::class, 'sendDelivered'])->name('dashboard.sendDelivered');
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
     //Aplikasi
