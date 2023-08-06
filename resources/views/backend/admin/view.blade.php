@@ -209,8 +209,12 @@
                                                                                     {{ $r == $a->role ? 'selected' : '' }}>
                                                                                     @if ($r == 1)
                                                                                         Admin
+                                                                                    @elseif ($r == 2)
+                                                                                        Gudang 
+                                                                                    @elseif ($r == 3)
+                                                                                        Manager
                                                                                     @else
-                                                                                        Super Admin
+                                                                                        Kepala Bagian
                                                                                     @endif
                                                                                 </option>
                                                                             @endforeach

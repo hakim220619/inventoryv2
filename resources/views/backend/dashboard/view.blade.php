@@ -96,124 +96,126 @@
     </div>
     <!-- end row -->
 
+    @if (request()->user()->role == 2)
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">Latest Transactions</h4>
 
-    <div class="row">
-        <div class="col-xl-6">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title mb-4">Latest Transactions</h4>
+                        <div class="table-responsive">
+                            <table class="table align-middle table-centered table-vertical table-nowrap">
 
-                    <div class="table-responsive">
-                        <table class="table align-middle table-centered table-vertical table-nowrap">
+                                <tbody id="show_delivered">
 
-                            <tbody id="show_delivered">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                            </tbody>
-                        </table>
+            <div class="col-xl-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">Latest Orders</h4>
+
+                        <div class="table-responsive">
+                            <table class="table align-middle table-centered table-vertical table-nowrap mb-1">
+
+                                <tbody>
+                                    @foreach ($approvedOrders as $ao)
+                                        <tr>
+                                            <td>{{ $ao->no_transaksi }}</td>
+
+                                            <td>
+                                                @if ($ao->status == 'APPROVAL')
+                                                    <span class="badge rounded-pill bg-warning">APPROVAL</span>
+                                                @else
+                                                    <span class="badge rounded-pill bg-success">DELIVERED</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                {{ $ao->tujuan }}
+                                            </td>
+                                            <td>
+                                                {{ $ao->total }}
+                                            </td>
+                                            <td>
+                                                <button type="button"
+                                                    class="btn btn-secondary btn-sm waves-effect waves-light"
+                                                    data-bs-toggle="modal" data-bs-target="#proses"
+                                                    value="{{ $ao->no_transaksi }}"
+                                                    onclick="transaksi(this.value)">Proses</button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="col-xl-6">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title mb-4">Latest Orders</h4>
-
-                    <div class="table-responsive">
-                        <table class="table align-middle table-centered table-vertical table-nowrap mb-1">
-
-                            <tbody>
-                                @foreach ($approvedOrders as $ao)
-                                    <tr>
-                                        <td>{{ $ao->no_transaksi }}</td>
-
-                                        <td>
-                                            @if ($ao->status == 'APPROVAL')
-                                                <span class="badge rounded-pill bg-warning">APPROVAL</span>
-                                            @else
-                                                <span class="badge rounded-pill bg-success">DELIVERED</span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            {{ $ao->tujuan }}
-                                        </td>
-                                        <td>
-                                            {{ $ao->total }}
-                                        </td>
-                                        <td>
-                                            <button type="button"
-                                                class="btn btn-secondary btn-sm waves-effect waves-light"
-                                                data-bs-toggle="modal" data-bs-target="#proses"
-                                                value="{{ $ao->no_transaksi }}"
-                                                onclick="transaksi(this.value)">Proses</button>
-                                        </td>
-                                    </tr>
-                                @endforeach
-
-                            </tbody>
-                        </table>
+        <div class="modal fade" id="proses" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Detail Product
+                        </h5>
+                        <input type="hidden" name="" id="no_transaksi">
+                        <button class="btn btn-success" style="margin-left: 20px;"
+                            onclick="sendDelivered()">Delivered</button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="proses" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Detail Product
-                    </h5>
-                    <input type="hidden" name="" id="no_transaksi">
-                    <button class="btn btn-success" style="margin-left: 20px;"
-                        onclick="sendDelivered()">Delivered</button>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
 
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-12">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12">
 
 
-                            <div class="table-rep-plugin">
-                                <div class="table-responsive mb-0" data-pattern="priority-columns">
-                                    <table id="data" class="table table-striped table-bordered dt-responsive nowrap"
-                                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
-                                        <thead>
-                                            <tr>
-                                                <th>No</th>
-                                                <th>No Transaksi</th>
-                                                <th>Kode</th>
-                                                <th>Jenis Bale</th>
-                                                <th>No Bale</th>
-                                                <th>Gross</th>
-                                                <th>Berat/KG</th>
-                                                <th>Status</th>
-                                                <th>Tujuan</th>
-                                                <th>Created</th>
+                                <div class="table-rep-plugin">
+                                    <div class="table-responsive mb-0" data-pattern="priority-columns">
+                                        <table id="data"
+                                            class="table table-striped table-bordered dt-responsive nowrap"
+                                            style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>No Transaksi</th>
+                                                    <th>Kode</th>
+                                                    <th>Jenis Bale</th>
+                                                    <th>No Bale</th>
+                                                    <th>Gross</th>
+                                                    <th>Berat/KG</th>
+                                                    <th>Status</th>
+                                                    <th>Tujuan</th>
+                                                    <th>Created</th>
 
-                                            </tr>
-                                        </thead>
+                                                </tr>
+                                            </thead>
 
-                                        <tbody id="show_data">
+                                            <tbody id="show_data">
 
-                                        </tbody>
-                                    </table>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
+
+                            <!-- end col -->
                         </div>
-
-                        <!-- end col -->
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light waves-effect" data-bs-dismiss="modal">Close</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light waves-effect" data-bs-dismiss="modal">Close</button>
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
     <script>
         transaksi();
         Delivered();
@@ -253,6 +255,7 @@
                 }
             });
         }
+
         function Delivered(param) {
             $.ajax({
                 type: 'GET',
@@ -272,13 +275,14 @@
                         html += '<tr>' +
                             '<td>' + no++ + '</td>' +
                             '<td>' + data[i].no_transaksi + '</td>' +
-                            '<td>' + '<span class="badge rounded-pill bg-success">'+data[i].status+'</span>' + '</td>' +
+                            '<td>' + '<span class="badge rounded-pill bg-success">' + data[i].status +
+                            '</span>' + '</td>' +
                             '<td>' + data[i].tujuan + '</td>' +
                             '<td>' + data[i].total + '</td>' +
 
                             '</tr>';
                     }
-                    
+
                     transaksi();
                     Delivered();
                     $('#show_delivered').html(html);

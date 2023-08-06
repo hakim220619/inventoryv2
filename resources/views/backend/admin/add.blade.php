@@ -74,7 +74,9 @@
                                     <select class="form-control" name="role" id="role" required>
                                         <option value="">-- Pilih --</option>
                                         <option value="1">Admin</option>
-                                        <option value="3">Super Admin</option>
+                                        <option value="2">Gudang</option>
+                                        <option value="3">Manager</option>
+                                        <option value="4">Kepala Bagian</option>
 
                                     </select>
                                 </div>

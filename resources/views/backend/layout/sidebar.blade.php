@@ -27,7 +27,7 @@
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
                             <li><a href="/admin">Admin</a></li>
-                            <li><a href="/users">Pengguna</a></li>
+                            {{-- <li><a href="/users">Gudang</a></li> --}}
                             <li><a href="/BahanBaku">Bahan Baku</a></li>
 
                         </ul>
@@ -90,12 +90,7 @@
 
                         </ul>
                     </li>
-                    <li>
-                        <a href="/pesanan" class="waves-effect">
-                            <i class="mdi mdi-cash-usd-outline"></i>
-                            <span>Pesanan</span>
-                        </a>
-                    </li>
+                    
                     <li>
                         <a href="/laporan" class="waves-effect">
                             <i class="mdi mdi-cash-usd-outline"></i>
@@ -135,6 +130,12 @@
                         <a href="/pesanan" class="waves-effect">
                             <i class="mdi mdi-cash-usd-outline"></i>
                             <span>Pesanan</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/riwayat-pesanan" class="waves-effect">
+                            <i class="mdi mdi-cash-usd-outline"></i>
+                            <span>Riwayat Pesanan</span>
                         </a>
                     </li>
                     <li>

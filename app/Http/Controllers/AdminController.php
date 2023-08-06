@@ -15,10 +15,10 @@ class AdminController extends Controller
     function view()
     {
         $data['title'] = "Admin";
-        $data['role'] = ['1', '3'];
+        $data['role'] = ['1','2', '3','4'];
         $data['status'] = ['ON', 'OFF'];
         // dd($data['status']);
-        $data['admin'] = DB::table('users')->where('role', '!=', '2')->get();
+        $data['admin'] = DB::table('users')->get();
         return view('backend.admin.view', $data);
     }
     function addAdmin()
