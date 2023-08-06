@@ -65,7 +65,7 @@
 
 
 
-             <div class="dropdown d-none d-lg-inline-block">
+             {{-- <div class="dropdown d-none d-lg-inline-block">
                  <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
                      <i class="mdi mdi-fullscreen font-size-24"></i>
                  </button>
@@ -184,7 +184,7 @@
                          </a>
                      </div>
                  </div>
-             </div>
+             </div> --}}
 
              
              <div class="dropdown d-inline-block">
@@ -195,7 +195,7 @@
                  </button>
                  <div class="dropdown-menu dropdown-menu-end">
                      <!-- item-->
-                     <a class="dropdown-item" href="profile"><i
+                     {{-- <a class="dropdown-item" href="profile"><i
                              class="mdi mdi-account-circle font-size-17 text-muted align-middle me-1"></i> Profile</a>
                      <a class="dropdown-item" href="#"><i
                              class="mdi mdi-wallet font-size-17 text-muted align-middle me-1"></i> My Wallet</a>
@@ -205,7 +205,7 @@
                      <a class="dropdown-item" href="#"><i
                              class="mdi mdi-lock-open-outline font-size-17 text-muted align-middle me-1"></i> Lock
                          screen</a>
-                     <div class="dropdown-divider"></div>
+                     <div class="dropdown-divider"></div> --}}
                      <a class="dropdown-item text-danger" href="logout"><i
                              class="mdi mdi-power font-size-17 text-muted align-middle me-1 text-danger"></i>
                          Logout</a>
