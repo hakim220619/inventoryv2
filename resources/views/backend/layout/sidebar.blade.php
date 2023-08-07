@@ -90,7 +90,12 @@
 
                         </ul>
                     </li>
-                    
+                    <li>
+                        <a href="/product" class="waves-effect">
+                            <i class="mdi mdi-cash-usd-outline"></i>
+                            <span>Product</span>
+                        </a>
+                    </li>
                     <li>
                         <a href="/laporan" class="waves-effect">
                             <i class="mdi mdi-cash-usd-outline"></i>
