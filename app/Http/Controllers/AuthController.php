@@ -27,7 +27,12 @@ class AuthController extends Controller
         ]);
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $session = User::where('email', $request->email)->first();
-            // dd($session);
+            if ($session->status == 'OFF') {
+                Alert::warning('Email not active.');
+                return back()->withInput()->withErrors([
+                    'email' => 'Email not active',
+                ]);
+            }
             Session::put('name', $session->name);
 
             $request->session()->regenerate();
