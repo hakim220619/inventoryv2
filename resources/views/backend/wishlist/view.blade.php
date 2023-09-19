@@ -74,6 +74,7 @@
                                         <th>Name</th>
                                         <th>Jenis</th>
                                         <th>Jumlah</th>
+                                        <th>Status</th>
                                         <th>Created</th>
                                         <th>Action</th>
                                     </tr>
@@ -89,6 +90,7 @@
                                             <td width="auto">{{ $a->full_name }}</td>
                                             <td width="auto">{{ $a->jenis }}</td>
                                             <td width="auto">{{ $a->jumlah }}</td>
+                                            <td width="auto">{{ $a->status }}</td>
                                             <td width="auto">{{ $a->created_at }}</td>
                                             <td><div class="col-md-4">
                                                 <a href="#" onclick="deleteItem(this)"
