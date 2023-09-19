@@ -152,8 +152,7 @@
                         var html = '';
                         var i;
                         var no = 1;
-                        var button =
-                            '<button type="submit" class="btn btn-danger delete" id="simpan" value="save">Delete</button>';
+
                         for (i = 0; i < data.length; i++) {
                             html += '<tr>' +
                                 '<td>' + no++ + '</td>' +
@@ -162,7 +161,9 @@
                                 '<td>' + data[i].no_bale + '</td>' +
                                 '<td>' + data[i].gross + '</td>' +
                                 '<td>' + data[i].berat + '</td>' +
-                                '<td nowrap="nowrap"> ' + button + '</td>' +
+                                '<td nowrap="nowrap"> ' +
+                                '<button type="submit" class="btn btn-danger delete" id="simpan" value="' +
+                                data[i].id + '" onclick="deleteItem(this.value)">Delete</button>' + '</td>' +
                                 '</tr>';
                         }
                         $(document).ready(function() {
@@ -234,9 +235,9 @@
             });
         })
 
-        function deleteItem(e) {
-
-            let id = e.getAttribute('data-id');
+        function deleteItem(param) {
+console.log(param);
+            // let id = e.getAttribute('data-id');
 
             Swal.fire({
                 title: 'Are you sure?',
@@ -258,7 +259,7 @@
                         ),
                         $.ajax({
                             type: 'GET',
-                            url: '{{ url('BahanBaku/delete/') }}/' + id,
+                            url: '{{ url('BahanBaku/deleteProduct/') }}/' + param,
                             data: {
                                 "_token": "{{ csrf_token() }}",
                             },

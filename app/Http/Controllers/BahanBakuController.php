@@ -70,4 +70,17 @@ class BahanBakuController extends Controller
             ]);
         }
     }
+    public function deleteProduct($id)
+    {
+        try {
+            // dd($id);
+            DB::table('product')->where('id', $id)->delete();
+            return redirect()->route('BahanBaku');
+        } catch (Exception $e) {
+            return response([
+                'success' => false,
+                'msg'     => 'Error : ' . $e->getMessage() . ' Line : ' . $e->getLine() . ' File : ' . $e->getFile()
+            ]);
+        }
+    }
 }

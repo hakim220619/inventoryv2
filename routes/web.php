@@ -66,6 +66,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('BahanBaku/addProses', [BahanBakuController::class, 'addProses'])->name('BahanBaku.addProses');
     Route::post('BahanBaku/editProses/{en}', [BahanBakuController::class, 'editProses'])->name('BahanBaku.editProses');
     Route::get('BahanBaku/delete/{id}', [BahanBakuController::class, 'delete'])->name('BahanBaku.delete');
+    Route::get('BahanBaku/deleteProduct/{id}', [BahanBakuController::class, 'deleteProduct'])->name('BahanBaku.deleteProduct');
 
 
     //Product
