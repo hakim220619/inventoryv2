@@ -39,6 +39,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="/wishlist" class="waves-effect">
+                            <i class="mdi mdi-cart"></i>
+                            <span>Wishlist</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="/pesanan" class="waves-effect">
                             <i class="mdi mdi-cash-usd-outline"></i>
                             <span>Pesanan</span>

@@ -5,12 +5,14 @@ use App\Http\Controllers\AplikasiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BahanBakuController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\WishlistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,6 +70,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('BahanBaku/delete/{id}', [BahanBakuController::class, 'delete'])->name('BahanBaku.delete');
     Route::get('BahanBaku/deleteProduct/{id}', [BahanBakuController::class, 'deleteProduct'])->name('BahanBaku.deleteProduct');
 
+    //Cart
+    Route::get('/wishlist', [WishlistController::class, 'view'])->name('wishlist');
+    Route::post('/wishlist/addProses', [WishlistController::class, 'addProses'])->name('wishlist.addProses');
 
     //Product
     Route::get('/product', [ProductController::class, 'view'])->name('product');
