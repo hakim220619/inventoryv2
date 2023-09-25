@@ -35,10 +35,12 @@ Route::post('/forgetPassword/action', [AuthController::class, 'forgetPasswordAct
 Route::get('/resetPassword/{token}', [AuthController::class, 'resetPassword'])->name('resetPassword');
 Route::post('/resetPassword/action', [AuthController::class, 'resetPasswordAction'])->name('resetPasswordAction');
 Route::middleware(['auth'])->group(function () {
+    
     Route::get('dashboard', [DashboardController::class, 'view'])->name('dashboard');
     Route::get('dashboardLoad', [DashboardController::class, 'load_data'])->name('dashboard.load_data');
     Route::get('load_delivered', [DashboardController::class, 'load_delivered'])->name('dashboard.load_delivered');
     Route::get('sendDelivered', [DashboardController::class, 'sendDelivered'])->name('dashboard.sendDelivered');
+    Route::get('wishlistShow', [DashboardController::class, 'wishlist'])->name('dashboard.wishlist');
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
     //Aplikasi
@@ -73,6 +75,7 @@ Route::middleware(['auth'])->group(function () {
     //Cart
     Route::get('/wishlist', [WishlistController::class, 'view'])->name('wishlist');
     Route::post('/wishlist/addProses', [WishlistController::class, 'addProses'])->name('wishlist.addProses');
+    Route::post('/wishlist/proses', [WishlistController::class, 'proses'])->name('wishlist.proses');
 
     //Product
     Route::get('/product', [ProductController::class, 'view'])->name('product');

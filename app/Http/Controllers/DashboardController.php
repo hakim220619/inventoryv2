@@ -45,6 +45,11 @@ class DashboardController extends Controller
                 $data = DB::select("SELECT t.*, COUNT(t.no_transaksi) as total FROM transaksi t WHERE t.status = 'DELIVERED' GROUP BY t.no_transaksi");
                 echo json_encode($data);
         }
+        public function wishlist()
+        {
+                $data = DB::select("select * from wishlist where status = 'Pending'");
+                echo json_encode($data);
+        }
         function sendDelivered(Request $request)
         {
                 DB::table('transaksi')->where('no_transaksi', $request->no_transaksi)->update(['status' => "DELIVERED"]);

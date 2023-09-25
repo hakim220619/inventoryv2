@@ -158,6 +158,30 @@
                 </div>
             </div>
         </div>
+        <div class="col-xl-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">Wishlist</h4>
+
+                    <div class="table-responsive wishlistTable">
+                        <table class="table align-middle table-centered table-vertical table-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Pesanan</th>
+                                    <th>Jenis</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="wishlist">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="modal fade" id="proses" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl" role="document">
@@ -219,6 +243,7 @@
     <script>
         transaksi();
         Delivered();
+        Wishlist();
         // DataTable('#da');
         function transaksi(param) {
             $.ajax({
@@ -289,6 +314,34 @@
                 }
             });
         }
+        function Wishlist() {
+            $.ajax({
+                type: 'GET',
+                url: "{{ route('dashboard.wishlist') }}",
+                async: true,
+                dataType: 'json',
+                success: function(data) {
+                    var html = '';
+                    var i;
+                    var no = 1;
+                    var button =
+                        '<button type="submit" class="btn btn-primary btnSelect" id="simpan" value="save">Pilih</button>';
+                    for (i = 0; i < data.length; i++) {
+                        html += '<tr>' +
+                            '<td>' + no++ + '</td>' +
+                            '<td hidden>' + data[i].id + '</td>' +
+                            '<td>' + data[i].jumlah + '</td>' +
+                            
+                            '<td>' + data[i].jenis + '</td>' +
+                            '<td>' + data[i].status + '</td>' +
+                            '<td>' +  '<button type="submit" class="btn btn-primary btnProsesWishlist" id="simpan" value="'+data[i].id+'">Proses</button>' + '</td>' +
+
+                            '</tr>';
+                    }
+                    $('#wishlist').html(html);
+                }
+            });
+        }
 
         function sendDelivered() {
             $.ajax({
@@ -312,5 +365,34 @@
             });
             return false;
         }
+        $(".wishlistTable").on('click', '.btnProsesWishlist', function() {
+                var currentRow = $(this).closest("tr");
+                var id = currentRow.find("td:eq(1)").text();
+                var jumlah = currentRow.find("td:eq(2)").text();
+                var jenis = currentRow.find("td:eq(3)").text();
+                var status = currentRow.find("td:eq(4)").text();
+
+                console.log(id);
+                $.ajax({
+                    type: "POST",
+                    url: '{{ route('wishlist.proses') }}',
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        id: id,
+                        
+                    },
+                    beforeSend: function() {
+                        $('.progress-bar').attr('style', "width: 0%");
+                    },
+                    success: function(data) {
+                        Wishlist();
+                        
+                        $('.progress-bar').attr('style', "width: 100%");
+                    },
+                    cache: false,
+                    dataType: 'html',
+                });
+                return false;
+            });
     </script>
 @endsection

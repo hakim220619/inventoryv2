@@ -21,4 +21,10 @@ class WishlistController extends Controller
         Alert::success('Wishlist successfully added.');
         return redirect('wishlist');
     }
+    function proses(Request $request)
+    {
+        // dd($request->all());
+        $data = DB::table('wishlist')->where('id', $request->id)->update(['status' => 'Selesai']);
+        echo json_encode($data);
+    }
 }
