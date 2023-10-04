@@ -13,7 +13,7 @@ class PesananController extends Controller
         $data['title'] = "Pesanan";
         $data['jenis_bale'] = db::select("select jenis_bale from bahan_baku group by jenis_bale ");
         $data['getCountProduct'] = db::select("SELECT COUNT(id) as total FROM bahan_baku WHERE stock < 10");
-// dd($data['getCountProduct'] );
+
         return view('backend.pesanan.view', $data);
     }
     function riwayatPesanan()
