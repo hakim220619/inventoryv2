@@ -236,7 +236,7 @@
         })
 
         function deleteItem(param) {
-console.log(param);
+// console.log(param);
             // let id = e.getAttribute('data-id');
 
             Swal.fire({
@@ -250,7 +250,7 @@ console.log(param);
             }).then((result) => {
                 if (result.isConfirmed) {
                     setInterval(function() {
-                            location.reload();
+                            // location.reload();
                         }, 30000),
                         Swal.fire(
                             'Deleted!',

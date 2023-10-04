@@ -85,6 +85,10 @@
                     <h5 class="modal-title" id="staticBackdropLabel">Product
                     </h5>
                     <button class="btn btn-success saveall" style="margin-left: 20px;">Save</button>
+                    @if ($getCountProduct[0]->total != 0)
+                    <a href="/wishlist" class="btn btn-danger" style="margin-left: 20px;">Wishlist</a>
+                    @endif
+                    
                     <div class="row">
                         <div class="col-md-12" style="margin-left: 20px;">
                             <select class="form-control" name="jenis_bale" id="jenis_bale">

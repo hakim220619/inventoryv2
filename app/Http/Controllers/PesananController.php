@@ -12,7 +12,8 @@ class PesananController extends Controller
     {
         $data['title'] = "Pesanan";
         $data['jenis_bale'] = db::select("select jenis_bale from bahan_baku group by jenis_bale ");
-
+        $data['getCountProduct'] = db::select("SELECT COUNT(id) as total FROM bahan_baku WHERE stock < 10");
+// dd($data['getCountProduct'] );
         return view('backend.pesanan.view', $data);
     }
     function riwayatPesanan()
@@ -167,8 +168,9 @@ class PesananController extends Controller
                 ]);
             } else {
 
-
+                // dd(count($data));
                 foreach ($data as $da) {
+                    
                     DB::table('transaksi')->insert([
                         'no_transaksi' => $request->no_transaksi,
                         'user_id' => request()->user()->id,
@@ -182,8 +184,17 @@ class PesananController extends Controller
                         'created_at' => now(),
 
                     ]);
+                    $cekStock = DB::table('bahan_baku')->where('kode', $da->kode)->first();
+                    // dd($cekStock);
+                    
+                    if ($cekStock->stock < 1) {
+                        DB::table('bahan_baku')->where('kode', $da->kode)->update(['stock' =>  0]);
+                    } else {
+                        DB::table('bahan_baku')->where('kode', $da->kode)->update(['stock' => $cekStock->stock - 1]);
+                    }
                     DB::table('cart')->where('user_id', request()->user()->id)->delete();
                 }
+
 
                 return response()->json([
                     'success' => true,

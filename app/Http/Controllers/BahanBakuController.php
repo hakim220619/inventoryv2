@@ -74,8 +74,16 @@ class BahanBakuController extends Controller
     {
         try {
             // dd($id);
+            $cekProduct = DB::table('product')->where('id', $id)->first();
+            $cekStock = DB::table('bahan_baku')->where('kode', $cekProduct->kode)->first();
+            // dd($cekStock);
+            if ($cekStock->stock < 1) {
+                DB::table('bahan_baku')->where('kode', $cekStock->kode)->update(['stock' =>  0]);
+            } else {
+                DB::table('bahan_baku')->where('kode', $cekStock->kode)->update(['stock' => $cekStock->stock - 1]);
+            }
             DB::table('product')->where('id', $id)->delete();
-            return redirect()->route('BahanBaku');
+            // return redirect()->route('BahanBaku');
         } catch (Exception $e) {
             return response([
                 'success' => false,

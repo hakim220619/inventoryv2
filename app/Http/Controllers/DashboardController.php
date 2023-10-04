@@ -47,7 +47,7 @@ class DashboardController extends Controller
         }
         public function wishlist()
         {
-                $data = DB::select("select * from wishlist where status = 'Pending'");
+                $data = DB::select("select w.*, bk.stock from wishlist w, bahan_baku bk where w.jenis=bk.jenis_bale AND w.status = 'Pending'");
                 echo json_encode($data);
         }
         function sendDelivered(Request $request)

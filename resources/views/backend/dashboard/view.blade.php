@@ -334,7 +334,11 @@
                             
                             '<td>' + data[i].jenis + '</td>' +
                             '<td>' + data[i].status + '</td>' +
-                            '<td>' +  '<button type="submit" class="btn btn-primary btnProsesWishlist" id="simpan" value="'+data[i].id+'">Proses</button>' + '</td>' +
+                            '<td>' + '' +
+                            ((data[i].jumlah <= data[i].stock) ?
+                            '<button type="submit" class="btn btn-primary btnProsesWishlist"  id="simpan" value="'+data[i].id+'">Proses</button>' : '') +
+                            '</td>' +
+                            
 
                             '</tr>';
                     }
